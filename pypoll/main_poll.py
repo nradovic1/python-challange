@@ -51,7 +51,7 @@ with open(file, 'r') as csvfile:
     winner = max(list_of_votes)
 
 original_stdout = sys.stdout
-with open("filetest.txt", "w") as ft:    
+with open("output_pypoll.txt", "w") as ft:    
     
     sys.stdout = ft
     print('Election Results')

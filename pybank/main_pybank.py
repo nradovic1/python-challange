@@ -2,6 +2,7 @@ import os
 import csv
 from decimal import Decimal
 import statistics
+import sys
 
 file = os.path.join('/Users/novakradovic/Git/python-challange/pybank/Resources/budget_data.csv')
 
@@ -26,21 +27,18 @@ with open(file, 'r') as csvfile:
 
     total_pro = int(sum(Decimal(i) for i in pro_loss))
 
-    for i in pro_loss:
-        pro_int = int(i)
-        
-        if pro_int != (pro_int+1): avg_change = pro_int + (pro_int+1)
+    
 
-        print(avg_change)
+    avg_change = round(statistics.mean(Decimal(i) for i in pro_loss),2)
 
-    #avg_change = round(statistics.mean(Decimal(i) for i in pro_loss),2)
+    max_pro = max(Decimal(i) for i in pro_loss)
 
-    max_pro = max(avg_change)
+    min_pro = min(Decimal(i) for i in pro_loss)
 
-    #min_pro = min(Decimal(i) for i in pro_loss)
+original_stdout = sys.stdout
+with open("output_pybank.txt", "w") as ft:
 
-
-
+    sys.stdout = ft
     print('Financial Analysis')
     print('---------------------------------')
     print(f'Total Months: {str(total_months)}')
@@ -48,6 +46,8 @@ with open(file, 'r') as csvfile:
     print(f'Average Change: ${str(avg_change)}')
     print(f'Greatest Increase In Profits: ${str(max_pro)}')
     print(f'Greatest Decrease in Profits: ${str(min_pro)}')
+    sys.stdout = original_stdout
+    
   
 
 
