@@ -1,5 +1,7 @@
 import os
 import csv
+import sys
+
 
 
 file = os.path.join('/Users/novakradovic/Git/python-challange/pypoll/Resources/election_data.csv')
@@ -12,16 +14,79 @@ with open(file, 'r') as csvfile:
     data = {'Voter': [], 'ID County': [], 'Candidate': []}
 
     for row in ff:
-        data['Voter'].append(row[0])
-        data['ID County'].append(row[1])
+        
+        
         data['Candidate'].append(row[2])
 
-        voter = list(data['Voter'])
-        ID_County = list(data['ID County'])
+        
         Candidate = (data['Candidate'])
 
     total_votes = len(Candidate)
-    set_voter = set(data['Candidate'])
+
+    khan = 0
+    correy = 0
+    li = 0
+    otooley = 0
+
+    for vote in Candidate:
+        if vote== 'Khan':
+            khan = khan + 1
+        elif vote == 'Correy':
+            correy = correy + 1
+        elif vote == 'Li':
+            li = li + 1
+        else: 
+            otooley = otooley + 1
+
+    khan_f = float(khan)
+    khan_per = format(((khan/total_votes)*100), '.4f')
+    correy_f = float(correy)
+    correy_per = format(((correy/total_votes)*100), '.3f')
+    li_f = float(li)
+    li_per = format(((li/total_votes)*100), '.3f')
+    otooley_f = float(otooley)
+    otooley_per = format(((otooley/total_votes)*100), '.3f')
+
+    list_of_votes = [(khan), (correy), (li), (otooley)]
+    winner = max(list_of_votes)
+
+original_stdout = sys.stdout
+with open("filetest.txt", "w") as ft:    
     
-    print('hello')
+    sys.stdout = ft
+    print('Election Results')
+    print('------------------------------------')
+    print(f'Total Votes: {total_votes}')
+    print('------------------------------------')
+    print(f'Khan: {khan_per}% ({khan})')
+    print(f'Correy: {correy_per}% ({correy})')
+    print(f'Li: {li_per}% ({li})')
+    print(f"O'Tooley: {otooley_per}% ({otooley})")
+    print('------------------------------------')
+
+    if winner == (khan):
+        print('Wiiner: Khan')
+    elif winner == (correy):
+        print('Winner: Correy')
+    elif winner == (li):
+        print('Winner: Li')
+    else:
+        print("Winner: O'Tooley")
+    
+    print('------------------------------------')
+    sys.stdout = original_stdout
+
+    
+
+
+
+    
+    
+
+    
+    #print(f'Khan: {khan_per}% ({khan})')
+    #print(f'Correy: {correy_per}% ({correy})')
+    #print(f'Li: {li_per}% ({li})')
+    #print(f"O'Tooley: {otooley_per}% ({otooley})")
+
     

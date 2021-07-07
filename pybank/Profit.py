@@ -3,8 +3,6 @@ import csv
 from decimal import Decimal
 import statistics
 
-
-
 file = os.path.join('/Users/novakradovic/Git/python-challange/pybank/Resources/budget_data.csv')
 
 with open(file, 'r') as csvfile:
@@ -18,36 +16,38 @@ with open(file, 'r') as csvfile:
         list_of_data['Profit/Losses'].append(row[1])
         list_of_data['Month'].append(row[0])
 
-        pro_loss = list_of_data['Profit/Losses']
-        months = list_of_data['Month']
+    pro_loss = list_of_data['Profit/Losses']
+        
+    months = list_of_data['Month']
 
-        total_months = len(months)
+    total_months = len(months)
     
         #type_test = type(pro_loss)
 
-        total_pro = int(sum(Decimal(i) for i in pro_loss))
+    total_pro = int(sum(Decimal(i) for i in pro_loss))
 
-        avg_change = round(statistics.mean(Decimal(i) for i in pro_loss),2)
+    for i in pro_loss:
+        pro_int = int(i)
+        
+        if pro_int != (pro_int+1): avg_change = pro_int + (pro_int+1)
 
-        max_pro = max(Decimal(i) for i in pro_loss)
+        print(avg_change)
 
-        min_pro = min(Decimal(i) for i in pro_loss)
+    #avg_change = round(statistics.mean(Decimal(i) for i in pro_loss),2)
 
-       
-        #total_pro = sum(pro_loss)
+    max_pro = max(avg_change)
 
-    #for pro_loss, value in list_of_data:
-        #if value == max_pro:
-            #value
+    #min_pro = min(Decimal(i) for i in pro_loss)
+
 
 
     print('Financial Analysis')
-    print('---------------------------------)')
+    print('---------------------------------')
     print(f'Total Months: {str(total_months)}')
     print(f'Total: ${str(total_pro)}')
     print(f'Average Change: ${str(avg_change)}')
     print(f'Greatest Increase In Profits: ${str(max_pro)}')
     print(f'Greatest Decrease in Profits: ${str(min_pro)}')
-    #print(max_date)
+  
 
 
